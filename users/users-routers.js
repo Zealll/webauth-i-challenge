@@ -2,9 +2,15 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 
+const { restricted } = require('./middleware.js')
+
 const db = require('./users-helpers.js')
 
-router.get('/', (req, res) => {
+
+
+
+
+router.get('/', restricted,(req, res) => {
     db
     .get()
     .then(users => res.status(200).json(users))
@@ -22,7 +28,7 @@ router.post('/register', (req,res) => {
     .catch(error => res.status(500).json(error))
 })
 
-router.post('/login', (req,res) => {
+router.post('/login',  (req,res) => {
     let { username, password } = req.body
 
     db
@@ -37,6 +43,8 @@ router.post('/login', (req,res) => {
     })
     .catch(error => res.status(500).json(error))
 })
+
+
 
 
 
