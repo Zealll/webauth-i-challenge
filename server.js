@@ -1,8 +1,8 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
-const bcrypt = require('bcryptjs')
 
+const routers = require('./users/users-routers.js')
 
 
 const server = express()
@@ -16,6 +16,8 @@ server.get('/', (req, res) => {
         `<h1>Welcome to Elan's Project</h1>`
     )
 })
+
+server.use('/api/users', routers)
 
 
 module.exports = server
